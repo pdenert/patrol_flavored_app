@@ -42,6 +42,8 @@ android {
         targetSdk = flutter.targetSdkVersion
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
+        testInstrumentationRunner "pl.leancode.patrol.PatrolJUnitRunner"
+        testInstrumentationRunnerArguments clearPackageData: "true"
     }
 
     buildTypes {
@@ -51,7 +53,7 @@ android {
             signingConfig = signingConfigs.debug
         }
     }
-    
+
     flavorDimensions "default"
 
     productFlavors {
@@ -61,8 +63,16 @@ android {
             applicationIdSuffix ".free"
         }
     }
+   
+    testOptions {
+        execution "ANDROIDX_TEST_ORCHESTRATOR"
+    }
 }
 
 flutter {
     source = "../.."
+}
+
+dependencies {
+    androidTestUtil "androidx.test:orchestrator:1.4.2"
 }
